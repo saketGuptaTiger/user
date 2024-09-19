@@ -1,0 +1,38 @@
+# This is a template configuration file for the User Sync Tool UMAPI connector
+#
+# Full documentation here -
+# https://adobe-apiplatform.github.io/user-sync.py/en/user-manual/sync_from_console.html
+
+# --- General Options ---
+# The following options control general UMAPI connector behavior.
+# See https://adobe-apiplatform.github.io/user-sync.py/en/user-manual/sync_from_console.html#configuring-a-connection
+
+# ssl_verify: False
+authentication_method: oauth
+identity_type_filter: all
+
+# --- Server Options ---
+# These generally never need to be changed by most users.
+# See https://adobe-apiplatform.github.io/user-sync.py/en/user-manual/sync_from_console.html#server-settings
+server:
+  #host: usermanagement.adobe.io
+  #endpoint: /v2/usermanagement
+  #auth_host: ims-na1.adobelogin.com
+  #auth_endpoint: /ims/exchange/jwt
+  #timeout: 120
+  #retries: 3
+
+# --- Integration Options ---
+# These options contain the credentials for connecting with the User Management API
+# client_id and client_secret can be stored in plaintext or can be secured (see below)
+# See https://adobe-apiplatform.github.io/user-sync.py/en/user-manual/sync_from_console.html#integration-settings
+integration:
+  client_id: "Client ID goes here"
+  client_secret: "Client secret goes here"
+  org_id: "Org ID goes here"
+
+  # NOTE: Credentials can be stored securely with these options
+  # secure_client_id_key: my_client_id
+  # secure_client_secret_key: my_client_secret
+  #
+  # See https://adobe-apiplatform.github.io/user-sync.py/en/user-manual/sync_from_console.html#credential-security

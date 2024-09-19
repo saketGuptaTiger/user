@@ -1,0 +1,52 @@
+# This is a template configuration file for the User Sync Tool LDAP connector
+# component
+#
+# Full documentation here - https://adobe-apiplatform.github.io/user-sync.py/en/user-manual/connect_ldap.html
+
+
+# --- Connection and Authentication Options ---
+# These options control how the LDAP connector connects to an LDAP system and authenticates with it
+# See https://adobe-apiplatform.github.io/user-sync.py/en/user-manual/connect_ldap.html#authentication
+
+username: "LDAP or Credential Manager username goes here"
+password: "LDAP password goes here"
+host: "ldaps://ldap.example.com"
+base_dn: "DC=example,DC=com"
+# authentication_method: Simple
+# secure_password_key: ldap_password
+
+
+# --- General Options ---
+# These are options that don't fit into the other categories
+# See https://adobe-apiplatform.github.io/user-sync.py/en/user-manual/connect_ldap.html#general-options
+
+# user_identity_type: enterpriseID
+# string_encoding: utf8
+
+
+# --- LDAP Query Options ---
+# These options govern how users and groups are retrieved from the LDAP system
+# See https://adobe-apiplatform.github.io/user-sync.py/en/user-manual/connect_ldap.html#ldap-query-options
+
+search_page_size: 1000
+all_users_filter: "(&(objectClass=user)(objectCategory=person)(!(userAccountControl:1.2.840.113556.1.4.803:=2)))"
+group_filter_format: "(&(|(objectCategory=group)(objectClass=groupOfNames)(objectClass=posixGroup))(cn={group}))"
+group_member_filter_format: "(memberOf={group_dn})"
+# dynamic_group_member_attribute: "memberOf"
+
+# two_steps_lookup:
+#   group_member_attribute_name: "member"
+#   nested_group: False
+
+
+# --- Attribute Mapping Options ---
+# These options define how LDAP user attributes map to Adobe user attributes
+# See https://adobe-apiplatform.github.io/user-sync.py/en/user-manual/connect_ldap.html#attribute-mapping-options
+
+user_email_format: "{mail}"
+# user_username_format: "{userPrincipalName}"
+# user_domain_format: "{domain}"
+# user_given_name_format: "{givenName}"
+# user_surname_format: "{sn}"
+# user_country_code_format: "{c}"
+# user_identity_type_format: "{idType}ID"

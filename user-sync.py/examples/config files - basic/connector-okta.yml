@@ -1,0 +1,31 @@
+# This is a template configuration file for the Okta directory connector
+# Learn more here: https://adobe-apiplatform.github.io/user-sync.py/en/user-manual/connect_okta.html
+
+# --- General Options ---
+# See https://adobe-apiplatform.github.io/user-sync.py/en/user-manual/connect_okta.html#general-options
+
+# user_identity_type: federatedID
+# string_encoding: utf8
+
+# --- API Options ---
+# See https://adobe-apiplatform.github.io/user-sync.py/en/user-manual/connect_okta.html#authentication
+
+host: "sample-817042.oktapreview.com"
+api_token: "00R_KJEaIcgAswrlO_sample_ZdgxC5scYZn8IZ-zi"
+
+# --- User Filter Options ---
+# See https://adobe-apiplatform.github.io/user-sync.py/en/user-manual/connect_okta.html#user-filter-options
+
+group_filter_format: "{group}"
+all_users_filter: 'user.status == "ACTIVE"'
+
+# --- Column Mapping Options ---
+# See https://adobe-apiplatform.github.io/user-sync.py/en/user-manual/connect_okta.html#attribute-mapping-options
+
+user_email_format: "{email}"
+# user_identity_type_format: "{idType}ID"
+# user_domain_format: "{domain}"
+# user_username_format: "{department}_{user_id}"
+# user_given_name_format: "{firstName}"
+# user_surname_format: "{lastName}"
+# user_country_code_format: "{countryCode}"

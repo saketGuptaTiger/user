@@ -1,0 +1,18 @@
+# This is the Sign connector config file template
+# For more information, see https://adobe-apiplatform.github.io/user-sync.py/en/user-manual/sign_sync.html#sign-connector-config
+
+# --- API Access Options ---
+# Options to configure Sign API access
+# See https://adobe-apiplatform.github.io/user-sync.py/en/user-manual/sign_sync.html#sign-connector-config
+host: api.echosign.com
+integration_key: [Sign API Key]
+admin_email: user@example.com
+
+# --- Target-specific Behavior Options ---
+# Options to govern target behavior
+create_users: False
+deactivate_users: False
+
+# Instead of storing API key in plaintext, store in OS credential keychain
+# See https://adobe-apiplatform.github.io/user-sync.py/en/user-manual/sign_sync.html#securing-the-api-key
+#secure_integration_key_key: sign_key

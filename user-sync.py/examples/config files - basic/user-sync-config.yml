@@ -1,0 +1,109 @@
+# This is the primary configuration file to set up user sync to the Admin Console (User Management API)
+# Full details can be found here: https://adobe-apiplatform.github.io/user-sync.py/en/user-manual/configuring_user_sync_tool.html
+
+# --- Adobe Users Options ---
+# Governs Adobe-side behavior and API connections
+# See https://adobe-apiplatform.github.io/user-sync.py/en/user-manual/configuring_user_sync_tool.html#adobe_users-config
+adobe_users:
+  exclude_identity_types:
+    - adobeID
+  exclude_adobe_groups:
+    - _org_admin
+  exclude_users:
+
+  # this example shows a single UMAPI config file for a single UMAPI sync target
+  # to learn how to set up multiple sync targets,
+  # see https://adobe-apiplatform.github.io/user-sync.py/en/user-manual/configuring_user_sync_tool.html#multiple-targets
+  # and https://adobe-apiplatform.github.io/user-sync.py/en/user-manual/advanced_configuration.html#accessing-groups-in-other-organizations
+  connectors:
+    umapi: "connector-umapi.yml"
+
+  # Enable or disable user attributes to be updated when `--update-user-info` or `update_user_info` is enabled
+  # `username` updates are disabled by default
+  update_attributes:
+    - firstname
+    - lastname
+    - email
+    # - username
+
+# --- Directory Users Options
+# Governs directory-side behavior and configuration related to the identity source
+# See https://adobe-apiplatform.github.io/user-sync.py/en/user-manual/configuring_user_sync_tool.html#directory_users-config
+directory_users:
+  user_identity_type: federatedID
+  default_country_code: US
+
+  # Optional advanced configuration
+  # See https://adobe-apiplatform.github.io/user-sync.py/en/user-manual/advanced_configuration.html#custom-attributes-and-mappings
+  # extension: extension-config.yml
+
+  # Links to directory connector configuration files
+  # Multiple connectors can be specified here as long as the corresponding config file exists
+  # See https://adobe-apiplatform.github.io/user-sync.py/en/user-manual/configuring_user_sync_tool.html#connectors-1
+  connectors:
+    ldap: "connector-ldap.yml"
+    # csv: "connector-csv.yml"
+    # okta: "connector-okta.yml"
+    # adobe_console: "connector-adobe-console.yml"
+
+  # Group mappings to link identity source (directory) groups to groups in the Admin Console
+  # See https://adobe-apiplatform.github.io/user-sync.py/en/user-manual/configuring_user_sync_tool.html#groups
+  groups:
+    - directory_group: "Acrobat_DC_Pro_Users"
+      adobe_groups:
+        - "Acrobat DC Pro Users"
+    - directory_group: "Adobe_All_Apps_Users"
+      adobe_groups:
+        - "Default All Apps plan - 100 GB configuration"
+        - "Creative Users"
+    - directory_group: "Adobe_Manual_Assign_Users"
+      adobe_groups:
+        # Adobe_Manual_Assign_Users group does not have default product
+        # profile/user group assignment.
+
+  # Advanced configuration to map groups dynamically based on regular expression rules
+  # See https://adobe-apiplatform.github.io/user-sync.py/en/user-manual/advanced_configuration.html#additional-group-options
+  # additional_groups:
+  #   - source: "ACL-(.+)"
+  #     target: "ACL-Grp-\\1"
+  #   - source: "(.+)-ACL"
+  #     target: "ACL-Grp-\\1"
+
+  # If auto_create is True, then unknown Adobe target groups will be created as user groups
+  # group_sync_options:
+  #   auto_create: False
+
+# --- Limit Options ---
+# The limit for maximum Adobe-only users prevents the Adobe-only action from running when the limit of Adobe-only users
+# is exceeded
+# See https://adobe-apiplatform.github.io/user-sync.py/en/user-manual/configuring_user_sync_tool.html#limits-config
+limits:
+  max_adobe_only_users: 200
+  # group_removals_only: True
+
+# --- Logging Options ---
+# Options that govern logging to the terminal (console) and/or log file(s)
+# See https://adobe-apiplatform.github.io/user-sync.py/en/user-manual/configuring_user_sync_tool.html#logging-config
+logging:
+  log_to_file: True
+  file_log_directory: logs
+  file_log_name_format: '{:%Y-%m-%d}.log'
+  file_log_level: info
+  console_log_level: info
+  log_progress: True
+
+# --- Invocation Defaults ---
+# These options govern the default behavior of the sync tool when invoked without command-line options to override them
+# See https://adobe-apiplatform.github.io/user-sync.py/en/user-manual/runtime_config.html
+invocation_defaults:
+  adobe_only_user_action: preserve
+  adobe_only_user_list:
+  adobe_users: all
+  connector: ldap
+  exclude_unmapped_users: No
+  process_groups: Yes
+  strategy: sync
+  test_mode: No
+  update_user_info: No
+  user_filter:
+  users: mapped
